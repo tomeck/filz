@@ -26,13 +26,13 @@
 	<int-amqp:inbound-gateway
 		id="comp1-inboundgw"
 		request-channel="requestChannel"
-		queue-names="q-halver"
+		queue-names="q-cuber"
 		connection-factory="connectionFactory" />
 
 	<int:chain input-channel="requestChannel">
-		<int:json-to-object-transformer type="com.teck.halver.Comp1Thing"/>
+		<int:json-to-object-transformer type="com.teck.cuber.Comp1Thing"/>
 		<int:service-activator method="myService">
-			<bean class="com.teck.halver.Halver"/>
+			<bean class="com.teck.cuber.Cuber"/>
 		</int:service-activator>
 		<int:object-to-json-transformer/>
 	</int:chain>
@@ -49,11 +49,11 @@
 	<!-- Rabbit connection factory (uses all defaults: localhost/guest account/port #) -->
 	<rabbit:admin connection-factory="connectionFactory" />
 
-	<rabbit:queue name="q-halver" auto-delete="false" />
+	<rabbit:queue name="q-cuber" auto-delete="false" />
 
 	<rabbit:topic-exchange name="si.teck.exchange" auto-delete="false" durable="true">
 		<rabbit:bindings>
-			<rabbit:binding queue="q-halver" pattern="wkflw2.main.toHalver"/>
+			<rabbit:binding queue="q-cuber" pattern="wkflw2.main.toCuber"/>
 		</rabbit:bindings>
 	</rabbit:topic-exchange>
 </beans>
